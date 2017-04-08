@@ -1,0 +1,56 @@
+Posit ISA (inspired by REX ISA)
+
+required arithmetic operations
+
+PINV  BS ES p_d p1                          # -p1 => p_d
+PADD  BS ES p_d p1 p2                       # p1 + p2 => p_d
+PSUB  BS ES p_d p1 p2                       # p1 - p2 => p_d
+PMUL  BS ES p_d p1 p2                       # p1 * p2 => p_d
+
+required comparison operations
+
+PCMP  BS ES r_d p1 p2                       # (p1 > p2 : 1) (p1 == p2 : 0) (p1 < p2 : -1) => r_d
+PLT   BS ES r_d p1 p2                       # (p1 < p2) => r_d
+PLEQ  BS ES r_d p1 p2                       # (p1 <= p2) => r_d
+PEQ   BS ES r_d p1 p2                       # (p1 == p2) => r_d
+
+full posit required arithmetic operations
+PDIV  BS ES p_d p1 p2                       # p1 / p2 => p_d
+PMINV BS ES p_d p1                          # /p1 => p_d
+PLOG2 BS ES p_d p1                          # log2(p1) => p_d
+P2EXP BS ES p_d p1                          # 2 ^ p2 => p_d
+
+full posit required fused operations
+
+PFMA  BS ES p_d p1 p2 p3                    # p1 * p2 + p3 => p_d
+PFMS  BS ES p_d p1 p2 p3                    # p1 * p2 - p3 => p_d
+PNFMA BS ES p_d p1 p2 p3                    # (-p1 * p2) + p3 => p_d
+PNFMS BS ES p_d p1 p2 p3                    # (-p1 * p2) - p3 => p_d
+PFCP  BS ES p_d p1 p2 p3 p4                 # (p1 * p2) - (p3 * p4) => p_d
+PCLR                                        # clears exact accumulator
+PPES  BS ES p_d p1                          # exact accumulator += p1; exact accumulator => p_d
+PPFDP BS ES p_d p1 p2                       # exact accumulator += p1 * p2; exact accumulator => p_d
+
+optional extended operations
+
+PSQRT BS ES p_d p1                          # sqrt(p1) => p_d
+PLN   BS ES p_d p1                          # ln(p1) => p_d
+PEEXP BS ES p_d p1                          # exp(p1) => p_d
+PEXP  BS ES p_d p1 p2                       # p1 ^ p2 => p_d
+PLOGY BS ES p_d p1 p2                       # log_p2(p1) => p_d
+PSIN  BS ES p_d p1                          # sin(p1) => p_d
+PCOS  BS ES p_d p1                          # cos(p1) => p_d
+PATAN BS ES p_d p1                          # atan(p1) => p_d
+PATN2 BS ES p_d p1 p2                       # atan2(p1, p2) => p_d
+
+optional conversion operations
+PI2P  BS ES IS p_d r1                       # converts integer in r1 to posit, puts into p_d
+PP2I  BS ES IS r_d p1                       # converts posit in p1 to nearest integer, puts into r_d
+PP2P  BS ES1 ES2 p_d p1                     # converts posit in p1 from ES1 to ES2, puts into p_d
+P2IEE BS ES IS f_d p1                       # converts posit in p1 to IEEE (size IS), puts into f_d
+#note bitsize conversion operations are not necessary.
+
+
+optional mode switching codes
+_RROUND                                     # switches to optional random rounding mode
+_NANMODE                                    # switches to optinoal NaN mode

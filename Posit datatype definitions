@@ -1,0 +1,20 @@
+Posit implementation levels:
+
+a PARTIAL Posit implementation:
+
+- Must implement arithmetic operations: +, -, *
+- Must implement comparison operator:
+- Must be labeled as PARTIAL
+
+a Posit implementation:
+
+- Must implement arithmetic operations: +, -, *, /
+- Must implement fused operations:
+fused multiply add
+fused cross product
+exact cumulative sum
+exact dot product
+
+- May implement extra operations:
+sqrt
+trigonometric operations(sin/cos/atan)
